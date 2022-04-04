@@ -43,7 +43,7 @@ if (isset($_GET["code"])) {
 //Ancla para iniciar sesión
 if (!isset($_SESSION['access_token'])) {
     //$login_button = '<a href="' . $google_client->createAuthUrl() . '" style=" background: #dd4b39; border-radius: 5px; color: white; display: block; font-weight: bold; padding: 20px; text-align: center; text-decoration: none; width: 200px;">Login With Google</a>';
-	$login_button = '<a href="' . $google_client->createAuthUrl() . '" class="btn btn-light">Iniciar sesión con Google <img src="img/logoGoogle.png" style="max-width:10%;"></a>';
+	$login_button = '<a href="' . $google_client->createAuthUrl() . '" class="btn btn-outline-primary">Iniciar sesión con Google <img src="assets/images/logoGoogle.png" style="max-width:10%;"></a>';
 }
 ?>
 <!DOCTYPE html>
@@ -66,25 +66,49 @@ if (!isset($_SESSION['access_token'])) {
 
 <body style="background: #111b51;">
     <div class="container">
-        <br />
-        <h2 align="center" style="text-align: center;"><img src="img/logo2.png" style=""></h2>
-        <br />
-        <div>
-            <div class="col-lg-4 offset-4">
-                <div class="card">
-                    <?php
-                    if ($login_button == '') {
-                        echo '<div class="card-header" align="center">Bienvenido</div><div class="card-body">';
-                        echo '<img src="' . $_SESSION["user_image"] . '" class="rounded-circle container"/>';
-                        echo '<h5><b>Name :</b> ' . $_SESSION['user_first_name'] . ' ' . $_SESSION['user_last_name'] . '</h5>';
-                        echo '<h5><b>Email :</b> ' . $_SESSION['user_email_address'] . '</h5>';
-                        //echo '<h3><a href="logout.php" >Logout</h3>';
-						echo '<a href="logout.php" class="btn btn-block btn-danger">Cerrar sesión</a>';
-						echo '</div>';
-                    } else {
-                        echo '<div align="center">' . $login_button . '</div>';
-                    }
-                    ?>
+        <?php
+        if($login_button == ''){
+        echo 
+        '<div class="row justify-content-center pt-5">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="text-center">
+                    <a href="https://conocetupasion.com/">
+                        <img src="assets/images/logo2.png" class="img-responsive center-block">
+                    </a>   
+                </div>
+            </div>
+        </div>';    
+        }
+        ?>
+        
+        <div class="row justify-content-center pt-5">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="text-center mb-4">
+                        <?php
+                            if($login_button != ''){
+                                //echo "sin informacion de usuario";
+                                echo '<a href="https://conocetupasion.com/" class="text-dark text-decoration-none">
+                                    <img src="assets/images/conocetupasionLogo.png" class="img-responsive center-block" style="max-width:40%">
+                                    </a>';
+                            }
+                        ?>
+                        
+                    </div>
+                    <div class="card-body bg-light">
+                        <div>
+                            <?php 
+                                if($login_button == ''){
+                                    echo '<img src="' . $_SESSION["user_image"] . '" class="rounded-circle container pb-2"/>';
+                                    echo '<h5><b>Name :</b> ' . $_SESSION['user_first_name'] . ' ' . $_SESSION['user_last_name'] . '</h5>';
+                                    echo '<h5><b>Email :</b> ' . $_SESSION['user_email_address'] . '</h5>';
+                                    echo '<a href="logout.php" class="btn btn-block btn-danger">Cerrar sesión</a>';
+                                }  else {
+                                    echo '<div align="center">' . $login_button . '</div>';
+                                }
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
